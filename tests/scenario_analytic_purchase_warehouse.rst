@@ -57,10 +57,10 @@ Create an analytic hierarchy::
     >>> root1 = AnalyticAccount(name='Root 1', type='root')
     >>> root1.save()
     >>> analytic_account = AnalyticAccount(name='Account 1.1', root=root1)
-    >>> root1.childs.append(analytic_account)
+    >>> analytic_account.save()
     >>> analytic_account = AnalyticAccount(name='Account 1.2', root=root1)
-    >>> root1.childs.append(analytic_account)
-    >>> root1.save()
+    >>> analytic_account.save()
+    >>> root1.reload()
 
 
 Create a second analytic hierarchy::
@@ -68,10 +68,10 @@ Create a second analytic hierarchy::
     >>> root2 = AnalyticAccount(name='Root 1', type='root')
     >>> root2.save()
     >>> analytic_account = AnalyticAccount(name='Account 2.1', root=root2)
-    >>> root2.childs.append(analytic_account)
+    >>> analytic_account.save()
     >>> analytic_account = AnalyticAccount(name='Account 2.2', root=root2)
-    >>> root2.childs.append(analytic_account)
-    >>> root2.save()
+    >>> analytic_account.save()
+    >>> root2.reload()
 
 
 Create parties::
