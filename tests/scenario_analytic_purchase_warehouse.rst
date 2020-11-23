@@ -24,13 +24,11 @@ Create company::
     >>> _ = create_company()
     >>> company = get_company()
 
-
 Reload the context::
 
     >>> User = Model.get('res.user')
     >>> Group = Model.get('res.group')
     >>> config._context = User.get_preferences(True, config.context)
-
 
 Create purchase user::
 
@@ -56,23 +54,25 @@ Create an analytic hierarchy::
     >>> AnalyticAccount = Model.get('analytic_account.account')
     >>> root1 = AnalyticAccount(name='Root 1', type='root')
     >>> root1.save()
-    >>> analytic_account = AnalyticAccount(name='Account 1.1', root=root1)
+    >>> analytic_account = AnalyticAccount(name='Account 1.1', root=root1,
+    ...     parent=root1)
     >>> analytic_account.save()
-    >>> analytic_account = AnalyticAccount(name='Account 1.2', root=root1)
+    >>> analytic_account = AnalyticAccount(name='Account 1.2', root=root1,
+    ...     parent=root1)
     >>> analytic_account.save()
     >>> root1.reload()
-
 
 Create a second analytic hierarchy::
 
     >>> root2 = AnalyticAccount(name='Root 1', type='root')
     >>> root2.save()
-    >>> analytic_account = AnalyticAccount(name='Account 2.1', root=root2)
+    >>> analytic_account = AnalyticAccount(name='Account 2.1', root=root2,
+    ...     parent=root2)
     >>> analytic_account.save()
-    >>> analytic_account = AnalyticAccount(name='Account 2.2', root=root2)
+    >>> analytic_account = AnalyticAccount(name='Account 2.2', root=root2,
+    ...     parent=root2)
     >>> analytic_account.save()
     >>> root2.reload()
-
 
 Create parties::
 
@@ -102,7 +102,6 @@ Create product::
     >>> template.default_uom = unit
     >>> template.type = 'goods'
     >>> template.purchasable = True
-    >>> template.salable = True
     >>> template.list_price = Decimal('10')
     >>> template.cost_price_method = 'fixed'
     >>> template.save()
