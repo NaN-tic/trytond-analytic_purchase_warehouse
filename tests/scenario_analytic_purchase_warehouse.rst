@@ -158,6 +158,7 @@ Prepare purchase to warehouse without analytic accounts::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 2.0
+    >>> purchase_line.unit_price = product.cost_price
     >>> purchase.save()
     >>> len(purchase.lines[0].analytic_accounts)
     2
@@ -175,6 +176,7 @@ Prepare purchase to warehouse with analytic accounts::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 3.0
+    >>> purchase_line.unit_price = product.cost_price
     >>> purchase.save()
     >>> purchase.lines[0].analytic_accounts[0].account.name
     'Account 1.1'
@@ -193,10 +195,12 @@ analytic account before add second line::
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 4.0
+    >>> purchase_line.unit_price = product.cost_price
     >>> purchase.warehouse = warehouse2
     >>> purchase_line = purchase.lines.new()
     >>> purchase_line.product = product
     >>> purchase_line.quantity = 5.0
+    >>> purchase_line.unit_price = product.cost_price
     >>> purchase.save()
     >>> len(purchase.lines[0].analytic_accounts)
     2
